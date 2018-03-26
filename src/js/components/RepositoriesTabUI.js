@@ -102,7 +102,8 @@ RepositoriesTabUI.Loading = () => {
   );
 };
 
-RepositoriesTabUI.Error = () => {
+RepositoriesTabUI.Error = ({err}) => {
+  console.log(err);
   return (
     <RepositoriesTabUI.Page>
       <RequestErrorMsg />

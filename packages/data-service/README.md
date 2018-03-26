@@ -110,3 +110,29 @@ const components$ = content$.map((data) =>
 
 export default renderComponents(components$);
 ```
+
+# Progress
+
+## DATA SERVICE
+- ✅ v0.1 Mediator observer API
+- 👷 v0.1 Model Query Live
+- 👷 v0.1 Model Schema
+- 👷 v0.1 Mediator React API data - DATA
+- 👻 filterOperation to filter particular events
+- 🔎 Newtork Stream Adaptor
+- 🔎 Network Protocol
+- 🔎 Model Cache
+- 🔎 Model Filtering
+- 🔎 Model Validation
+- 🔎 Model Subscription
+- 🔎 Model Mutation
+- 🔎 Mediator class
+- 🔎 Mediator API
+- 🔎 Medtiador React State API (loading, error)
+- 🔎 v0.1 Mediator React API - EVENTS
+
+## GRAPHQL
+
+## CHORE
+- Update Google Docs Document
+

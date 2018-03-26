@@ -1,0 +1,30 @@
+Open PR with design api
+	- unify implementation
+	- unify example
+	- unify readme docs api
+        - mover roadmap to a file
+        - escrever testes
+        - adaptar a api corrente para o jeito que a lousa descreve
+
+Aprender
+        - typescript
+        - repensar o significado de mediator
+
+Delegate work
+	- divide work with dime
+        - dividir o trabalho com o Dimitri
+
+Impl. Plumbing
+        - instalar typescript
+        - instalar wallaby.js
+
+Ideas/Questions
+	- pouched
+	- grpahql https://github.com/MikeBild/graphql-pouch
+        - dependency injection
+        - how to handle forms
+        - how to handle permissions
+
+Single source of todo list
+
+https://jira.mesosphere.com/secure/RapidBoard.jspa?rapidView=312&view=detail&selectedIssue=DCOS-21619&quickFilter=2932

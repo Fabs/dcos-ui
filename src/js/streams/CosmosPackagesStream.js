@@ -10,7 +10,7 @@ const cosmosPackageWrapper$ = Observable.timer(1000, 2000)
 
 const searchPackageSource$ = new Subject();
 const search$ = searchPackageSource$
-  .merge(Observable.of(""))
+  .startWith("")
   .publishReplay(1)
   .refCount();
 
@@ -20,7 +20,7 @@ const packageSources$ = cosmosPackageWrapper$
   })
   .map(({ repositories, searchTerm }) => {
     return {
-      repositories: repositories.filterItemsByText(searchTerm),
+      packageRepository: repositories.filterItemsByText(searchTerm),
       searchTerm
     };
   });
