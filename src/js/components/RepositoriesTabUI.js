@@ -1,8 +1,7 @@
 import { Link } from "react-router";
 import React from "react";
 
-import AddRepositoryFormModal
-  from "#SRC/js/components/modals/AddRepositoryFormModal";
+import AddRepositoryFormModal from "#SRC/js/components/modals/AddRepositoryFormModal";
 import Breadcrumb from "#SRC/js/components/Breadcrumb";
 import BreadcrumbTextContent from "#SRC/js/components/BreadcrumbTextContent";
 import FilterBar from "#SRC/js/components/FilterBar";
@@ -102,8 +101,7 @@ RepositoriesTabUI.Loading = () => {
   );
 };
 
-RepositoriesTabUI.Error = ({err}) => {
-  console.log(err);
+RepositoriesTabUI.Error = () => {
   return (
     <RepositoriesTabUI.Page>
       <RequestErrorMsg />

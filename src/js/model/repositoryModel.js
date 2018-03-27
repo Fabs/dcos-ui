@@ -1,4 +1,5 @@
 import RepositoryList from "#SRC/js/structs/RepositoryList";
+
 export const typeDefs = `
   type PackageRepository {
     id: ID!
@@ -17,7 +18,7 @@ export const typeDefs = `
 
 export const resolvers = {
   Query: {
-    packageRepository: (parent, args, context, info) => {
+    packageRepository: (parent, args, context) => {
       const { filter } = args;
 
       // Filter Logic Backwards compatible with the previous struct/RepositoryList
@@ -31,8 +32,8 @@ export const resolvers = {
     }
   },
   Mutation: {
-    addPackageRepository: (parent, args, context, info) => {
-      const { uri, name } = args;
-    }
+    // addPackageRepository: (parent, args, context, info) => {
+    //   const { uri, name } = args;
+    // }
   }
 };

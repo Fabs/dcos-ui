@@ -55,7 +55,12 @@ const components$ = graphqlObservable(packageRepositoryQuery, schema, {
 })
   .combineLatest(searchTerm$, (result, searchTerm) => {
     // Backwards compatible with the previous struct/RepositoryList for packages
-    return { packageRepository: new RepositoryList({ items: result.packageRepository }), searchTerm };
+    return {
+      packageRepository: new RepositoryList({
+        items: result.packageRepository
+      }),
+      searchTerm
+    };
   })
   .do(data => {
     console.log(data);
@@ -73,10 +78,10 @@ const components$ = graphqlObservable(packageRepositoryQuery, schema, {
   // The first component is the loading
   .startWith(<RepositoriesTabUI.Loading />)
   // If anything goes wrong, we render an error component
-  .catch(err => Observable.of(<RepositoriesTabUI.Error err={err}/>));
+  .catch(err => Observable.of(<RepositoriesTabUI.Error err={err} />));
 
 // componentFromStream create a single component who render the latest emitted
-// component from the stream;
+// component from the stream
 const RepositoriesTab = componentFromStream(() => components$);
 
 // the reason we don`t `export componentFromStream()` is so you can add those
@@ -87,11 +92,3 @@ RepositoriesTab.routeConfig = {
 };
 
 module.exports = RepositoriesTab;
-
-// const addPackageRepository = gql`
-//   mutation {
-//     addPackageRepository(uri: $uri, name: $name) {
-//       id
-//     }
-//   }
-// `;
