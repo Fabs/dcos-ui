@@ -1,7 +1,8 @@
 import { Link } from "react-router";
 import React from "react";
 
-import AddRepositoryFormModal from "#SRC/js/components/modals/AddRepositoryFormModal";
+import AddRepositoryFormModal
+  from "#SRC/js/components/modals/AddRepositoryFormModal";
 import Breadcrumb from "#SRC/js/components/Breadcrumb";
 import BreadcrumbTextContent from "#SRC/js/components/BreadcrumbTextContent";
 import FilterBar from "#SRC/js/components/FilterBar";

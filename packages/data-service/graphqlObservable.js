@@ -1,7 +1,7 @@
 // TDL - import wisely
 import { Observable } from "rxjs/Rx";
 
-export default const graphqlObservable = (query, schema, context) => {
+export const graphqlObservable = (query, schema, context) => {
   const translateOperation = {
     query: "Query"
   };
