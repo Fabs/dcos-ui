@@ -16,6 +16,7 @@ module.exports = {
     path: path.resolve(__dirname, "../dist")
   },
   resolve: {
+    extensions: [".ts", ".tsx", ".js"],
     alias: {
       PluginSDK: path.resolve(__dirname, "../src/js/plugin-bridge/PluginSDK"),
       PluginTestUtils: path.resolve(
@@ -28,7 +29,8 @@ module.exports = {
       ),
       "#PLUGINS": path.resolve(__dirname, "../plugins"),
       "#SRC": path.resolve(__dirname, "../src"),
-      "#TESTS": path.resolve(__dirname, "../tests")
+      "#TESTS": path.resolve(__dirname, "../tests"),
+      "#PACKAGES": path.resolve(__dirname, "../packages")
     },
     modules: [
       // include packages
@@ -72,6 +74,11 @@ module.exports = {
             attrs: ["link:href"]
           }
         }
+      },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        use: "ts-loader"
       },
       {
         test: /\.js$/,
