@@ -2,7 +2,7 @@
 import { Observable } from "rxjs/Rx";
 
 /* eslint-disable import/prefer-default-export */
-export const graphqlObservable = (query, schema, context) => {
+export const graphqlObservable = (doc, schema, context) => {
   const translateOperation = {
     query: "Query"
   };
@@ -17,7 +17,9 @@ export const graphqlObservable = (query, schema, context) => {
         const resolvedObservable = resolveStep(nextTypeMap, sel, context);
 
         const merger = (acc, el) => {
-          return { ...acc, [sel.name.value]: el };
+          const propertyName = definition.name !== undefined ? definition.name.value : sel.name.value;
+
+          return { ...acc, [propertyName]: el };
         };
 
         return acc.combineLatest(resolvedObservable, merger);
@@ -52,6 +54,7 @@ export const graphqlObservable = (query, schema, context) => {
       });
     }
 
+    // LeafField
     if (definition.kind === "Field") {
       return parent[definition.name.value];
     }
@@ -61,9 +64,18 @@ export const graphqlObservable = (query, schema, context) => {
     );
   };
 
-  // console.log(query.definitions[0].selectionSet.selections[0].selectionSet.selections)
-  // console.log(query.definitions[0].selectionSet.selections)
-  // console.log(schema._typeMap)
-  return resolveStep(schema._typeMap, query.definitions[0], context, null);
+  if(doc.definitions.length === 1) {
+    return resolveStep(schema._typeMap, doc.definitions[0], context, null);
+  }
+
+  return doc.definitions.reduce((acc, definition) => {
+    const resolvedObservable = resolveStep(schema._typeMap, definition, context, null);
+
+    const merger = (acc, resolved) => {
+      return { ...acc, ...resolved };
+    };
+
+    return acc.combineLatest(resolvedObservable, merger);
+  }, Observable.of({}));
 };
 /* eslint-enable */

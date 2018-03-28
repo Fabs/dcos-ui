@@ -125,5 +125,77 @@ describe("graphqlObservable", function() {
 
       m.expect(result.take(1)).toBeObservable(expected);
     });
+
+    itMarbles("filters out fields", function(m) {
+      const query = gql`
+        query {
+          launched {
+            name
+          }
+        }
+      `;
+
+      const expectedData = [{ name: "discovery", firstFlight: 1984 }];
+      const dataSource = Observable.of(expectedData);
+      const expected = m.cold("(a|)", {
+        a: { launched: [{ name: "discovery" }] }
+      });
+
+      const result = graphqlObservable(query, schema, {
+        query: dataSource
+      });
+
+      m.expect(result.take(1)).toBeObservable(expected);
+    });
+
+    itMarbles("resolve with query alias", function(m) {
+      const query = gql`
+        query nasa {
+          launched {
+            name
+          }
+        }
+      `;
+
+      const expectedData = [{ name: "discovery", firstFlight: 1984 }];
+      const dataSource = Observable.of(expectedData);
+      const expected = m.cold("(a|)", {
+        a: { nasa: [{ name: "discovery" }] }
+      });
+
+      const result = graphqlObservable(query, schema, {
+        query: dataSource
+      });
+
+      m.expect(result.take(1)).toBeObservable(expected);
+    });
+
+    itMarbles("resolve multiple queries with alias", function(m) {
+      const query = gql`
+        query nasa {
+          launched {
+            name
+          }
+        }
+
+        query roscosmos {
+          launched {
+            name
+          }
+        }
+      `;
+
+      const expectedData = [{ name: "discovery", firstFlight: 1984 }];
+      const dataSource = Observable.of(expectedData);
+      const expected = m.cold("(a|)", {
+        a: { nasa: [{ name: "discovery" }], roscosmos: [{ name: "discovery" }] }
+      });
+
+      const result = graphqlObservable(query, schema, {
+        query: dataSource
+      });
+
+      m.expect(result.take(1)).toBeObservable(expected);
+    });
   });
 });

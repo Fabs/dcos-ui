@@ -35,7 +35,7 @@ const schema = makeExecutableSchema({
 // 2. We declare which data our component needs in graphql (data down)
 const packageRepositoryQuery = gql`
   query {
-    packageRepository(filter: $searchTerm) {
+    packageRepository(filter: $filter) {
       name
       uri
     }
@@ -61,9 +61,6 @@ const components$ = graphqlObservable(packageRepositoryQuery, schema, {
       }),
       searchTerm
     };
-  })
-  .do(data => {
-    console.log(data);
   })
   // We map over the data and return a component to render
   .map(data => {
